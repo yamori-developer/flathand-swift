@@ -4,10 +4,23 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>flathand.xcscheme</key>
+		<key>flathand.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>B5F4F54020F5E65F00635819</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B5F4F55420F5E66000635819</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
