@@ -33,7 +33,7 @@ end
 
 desc "Mock起動"
 task :mock do |t|
-  sh "$(npm bin)/stubcell -e stub-api/entry.yml -p 8081"
+  sh "$(npm bin)/stubcell -e stub-api/entry.yml -p 8081 &"
 end
 
 desc "Firebase Crash Reportingを表示"
