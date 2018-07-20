@@ -22,7 +22,35 @@ class flathandTests: XCTestCase {
     }
     
     func testExample() {
-        XCTAssertEqual(0, 1)
+        
+        waitForBlock(description: ""){ fulfill in
+            // create the url-request
+            let urlString = "http://127.0.0.1:8081/api/v1/signin"
+            let request = NSMutableURLRequest(url: URL(string: urlString)!)
+            
+            // set the method(HTTP-GET)
+            request.httpMethod = "GET"
+            
+            // use NSURLSessionDataTask
+            let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                if (error == nil) {
+                    let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
+                    print(result)
+                    fulfill()
+                } else {
+                    print(error ?? "errorだよ")
+                    fulfill()
+                }
+            })
+            task.resume()
+        }
+
+    }
+    
+    typealias FullFillBlock = () -> Void
+    func waitForBlock(description: String, timeout: TimeInterval = 10, closure: (@escaping FullFillBlock ) -> Void ){
+        closure(expectation(description: description).fulfill)
+        waitForExpectations(timeout: timeout, handler: nil)
     }
     
     func testPerformanceExample() {

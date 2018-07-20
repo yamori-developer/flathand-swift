@@ -13,7 +13,7 @@
     url: /api/v1/signin
     method: POST
     body:
-      code: 409
+      code: 200
   response:
-    status: 409
+    status: 200
     file: 'data/409.json'
