@@ -1,0 +1,19 @@
+- # /api/v1/signin
+  request:
+    url: /api/v1/unknown
+    method: POST
+    body:
+      code: 502
+  response:
+    status: 502
+    file: 'data/502.json'
+
+- # /api/v1/signin
+  request:
+    url: /api/v1/signin
+    method: POST
+    body:
+      code: 409
+  response:
+    status: 409
+    file: 'data/409.json'
