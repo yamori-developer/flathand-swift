@@ -22,7 +22,11 @@ class flathandTests: XCTestCase {
     }
     
     func testExample() {
-        XCTAssertEqual(0, 1)
+        let url = URL(string: "http://localhost:8081/api/v1/unknown")!
+        let result = URLSession.shared.synchronousDataTask(with: url)
+        print("hogehoge")
+        print(result.code)
+        XCTAssert(result.code == 200)
     }
     
     func testPerformanceExample() {
@@ -32,4 +36,35 @@ class flathandTests: XCTestCase {
         }
     }
     
+}
+
+extension URLSession {
+    
+    /*
+     * synchronousDataTask
+     *
+     * Httpデータを同期的に取得します。スレッドをブロックするので使用に注意してください。
+     */
+    
+    func synchronousDataTask(with request:URLRequest) -> (data:Data?, response:URLResponse?, error:Error?, code:Int) {
+        let semaphore = DispatchSemaphore(value: 0)
+        var _dat : Data?
+        var _res : URLResponse?
+        var _err : Error?
+        var _code : Int?
+        self.dataTask(with: request) { dat, res, err in
+            if let httpres = res as? HTTPURLResponse {
+                print("statusCode: \(httpres.statusCode)")
+                _dat = dat; _res = res; _err = err; _code = httpres.statusCode;
+                semaphore.signal()
+            }
+            }.resume()
+        _ = semaphore.wait(timeout: .distantFuture)
+        return (_dat, _res, _err, _code!)
+    }
+    
+    func synchronousDataTask(with url:URL) -> (data:Data?, response:URLResponse?, error:Error?, code:Int) {
+        return self.synchronousDataTask(with: URLRequest(url: url))
+    }
+
 }

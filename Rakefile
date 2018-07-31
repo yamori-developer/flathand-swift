@@ -1,4 +1,4 @@
-project_name = "auHome"
+project_name = "flathand"
 
 desc "Initial setup"
 task :setup do

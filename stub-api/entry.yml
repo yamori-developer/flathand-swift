@@ -1,7 +1,14 @@
 - # /api/v1/signin
   request:
+    url: /
+    method: GET
+  response:
+    status: 200
+
+- # /api/v1/signin
+  request:
     url: /api/v1/unknown
-    method: POST
+    method: GET
     body:
       code: 502
   response:
@@ -11,7 +18,7 @@
 - # /api/v1/signin
   request:
     url: /api/v1/signin
-    method: POST
+    method: GET
     body:
       code: 409
   response:
