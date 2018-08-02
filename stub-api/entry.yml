@@ -13,5 +13,5 @@
     url: /api/v1/signin
     method: POST
   response:
-    status: 409
+    status: 200
     file: 'data/409.json'
