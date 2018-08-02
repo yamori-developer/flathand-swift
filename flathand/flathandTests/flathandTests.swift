@@ -29,18 +29,22 @@ class flathandTests: XCTestCase {
             let request = NSMutableURLRequest(url: URL(string: urlString)!)
             
             // set the method(HTTP-GET)
-            request.httpMethod = "GET"
+            request.httpMethod = "POST"
             
             // use NSURLSessionDataTask
             let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-                if (error == nil) {
-                    let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
-                    print(result)
-                    fulfill()
-                } else {
-                    print(error ?? "errorだよ")
+                if (response as? HTTPURLResponse)?.statusCode != 200 {
+                    XCTFail()
                     fulfill()
                 }
+//                if (error == nil) {
+//                    let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
+//                    print(result)
+//                    fulfill()
+//                } else {
+//                    print(error ?? "errorだよ")
+//                    fulfill()
+//                }
             })
             task.resume()
         }
