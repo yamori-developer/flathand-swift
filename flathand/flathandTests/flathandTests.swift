@@ -36,6 +36,8 @@ class flathandTests: XCTestCase {
                 if (response as? HTTPURLResponse)?.statusCode != 200 {
                     XCTFail()
                     fulfill()
+                } else {
+                    fulfill()
                 }
 //                if (error == nil) {
 //                    let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
